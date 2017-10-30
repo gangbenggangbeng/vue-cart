@@ -10,6 +10,9 @@ new Vue({
   filters: {
     formatMoney: function(value) {
       return "¥" + value.toFixed(2);
+    },
+    money: function (val,type){
+      return "¥" + val.toFixed(2)+type;
     }
 
   },
@@ -27,6 +30,7 @@ new Vue({
         });
       },
       changeMoney: function(product, way) {
+         this.calcTotalPrice();
         if (way > 0) {
           product.productQuantity++;
         }
@@ -36,7 +40,7 @@ new Vue({
             product.productQuantity = 1;
           }
         }
-        this.calcTotalPrice();
+       
 
       },
       selectedProduct: function(item) {
@@ -68,6 +72,8 @@ new Vue({
         this.productList.forEach(function(item, index) {
           if (item.checked) {
             _this.totalMoney += item.productPrice * item.productQuantity;
+          }else{
+            _this.totalMoney += item.productPrice * item.productQuantity;
           }
         });
       },
@@ -83,6 +89,6 @@ new Vue({
     }
 });
 // 全局过滤器
-Vue.filter('money', function(value, type) {
+/*Vue.filter('money', function(value, type) {
   return "¥" + value.toFixed(2) + type;
-})
+})*/

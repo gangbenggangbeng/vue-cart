@@ -4,7 +4,12 @@ new Vue({
     limitNum: 3,
     addressList: [],
     currentIndex: 0,
-    shippingMethod: 1
+    shippingMethod: 1,
+    addressId: "",
+    userName: "",
+    streetName: "",
+    tel: "",
+    isDefault: "",
   },
   mounted: function() {
     this.$nextTick(function() {
@@ -38,6 +43,19 @@ new Vue({
           address.isDefault = false;
         }
       });
+    },
+    addNewaddress: function(){
+      $("#showModalw").addClass("md-show")
+    },
+    saveNewaddress: function(){
+      alert(12213)
+      this.addressList.push({
+        addressId: this.addressId,
+        userName: this.username,
+        streetName: this.streetName,
+        tel: this.tel,
+        isDefault:true,
+      })
     }
   }
 });

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>过滤器-shangsheng</title>
+</head>
+<body>
+    <div id="app">
+        <div>
+            <input type="text" v-model="length">mm
+
+            {{ length | meter }}
+        </div>
+        <hr>
+        <input type="text" v-model="price">
+        {{ price | currency("usd") }}
+    </div>
+</body>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/vue/2.1.3/vue.js"></script>
+<script type="text/javascript">
+//价格,动态的,重复,详情,付款,购物车页,等都有价格信息.
+//如果过滤器的属性很复杂,就写在计算属性下面,复用性比较强
+   Vue.filter("currency",function(val,unit){
+        val = val || 0;
+        // unit = unit || "元"
+        return val + "元"
+   })
+    
+    Vue.filter("meter",function (val,unit){
+        val = val || 0;
+        unit = unit || "m";
+        return (val/1000).toFixed(2) + unit;
+        //
+    })
+
+
+//初始化父组件
+    var parent = new Vue({
+        el:"#app",
+        data :{
+            price : 10,
+            length : 10
+        }
+    })
+</script>
+</html>

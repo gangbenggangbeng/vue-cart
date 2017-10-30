@@ -644,6 +644,9 @@
   text-align: center; }
 
 /** cart **/
+#one{
+  background: cyan;
+}
 .cart {
   padding: 69px 0 54px 0; }
 

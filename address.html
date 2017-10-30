@@ -85,12 +85,12 @@
                   <div class="addr-opration addr-default" v-if="item.isDefault">默认地址</div>
                 </li>
 
-                <li class="addr-new">
+                <li class="addr-new" @click="addNewaddress()">
                   <div class="add-new-inner">
                     <i class="icon-add">
                       <svg class="icon icon-add"><use xlink:href="#icon-add"></use></svg>
                     </i>
-                    <p >添加新地址</p>
+                    <p>添加新地址</p>
                   </div>
                 </li>
               </ul>
@@ -157,7 +157,7 @@
                     </label>
                     <div class="md-form-item__content" style="margin-left: 80px;">
                       <div  class="el-input">
-                        <input type="text" autocomplete="off" class="md-input__inner">
+                        <input type="text" autocomplete="off" class="md-input__inner" v-model="userName">
                       </div>
                     </div>
                   </div>
@@ -167,7 +167,7 @@
                     </label>
                     <div class="md-form-item__content" style="margin-left: 80px;">
                       <div  class="el-input">
-                        <input type="text" autocomplete="off" class="md-input__inner">
+                        <input type="text" autocomplete="off" class="md-input__inner" v-model="streetName">
                       </div>
                     </div>
                   </div>
@@ -183,7 +183,7 @@
                   </div>
                 </div>
                 <div class="btn-wrap col-2">
-                  <button class="btn btn--s" id="btnModalConfirms">保存</button>
+                  <button class="btn btn--s" id="btnModalConfirms" @click="saveNewaddress">保存</button>
                   <button class="btn btn--s btn--red" id="btnModalCancels">取消</button>
                 </div>
               </div>
@@ -195,7 +195,7 @@
       </div>
     </div>
 
-
+    <script src="js/jquery.min.js"></script>
     <script src="js/lib/vue.min.js"></script>
     <script src="js/lib/vue-resource.js"></script>
     <script src="js/address.js"></script>

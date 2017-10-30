@@ -79,7 +79,7 @@
     position: absolute;
     top: 16px;
     left: -4px;
-    content: "";
+    /* content: ""; */
     width: 44px;
     height: 3px;
     background: #605f5f;

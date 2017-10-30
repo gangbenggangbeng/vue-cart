@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>混合</title>
+    <style>
+        *{
+            font-size: 30px;
+        }
+    .card{
+        height:200px;
+        background:#ccc;
+        width:150px;
+        
+    }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <tooltip></tooltip>
+        <popup></popup> 
+    </div>
+</body>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/vue/2.1.3/vue.js"></script>
+<script type="text/javascript">
+var base = {
+    methods :{
+        show(){
+            this.visible = true;
+        },
+        hide(){
+            this.visible = false;
+        },
+        toggle(){
+            this.visible = !this.visible;
+        }
+    },
+    data(){
+        return{
+            visible:false,
+        }
+    }
+}
+Vue.component("tooltip",{
+    template : `
+        <div>
+       <span @mouseenter="show" @mouseleave="hide">buys</span>
+        <div v-if="visible"> 
+            day day up
+        </div>
+        </div>
+    `,
+    mixins :[base]
+})
+Vue.component("popup",{
+    template : `
+        <div>
+        <button @click="toggle">popup</button>
+        <div v-if="visible"> 
+        <span @click="hide">&times;</span>
+            <h4>title</h4>
+            good good study,day day up;
+        </div>
+        </div>
+    `,
+    mixins :[base]
+})
+//初始化父组件
+    var parent = new Vue({
+        el:"#app",
+        data :{
+            card1 : {
+                pinned:false
+            },
+            card2 : {
+                pinned:false
+            },
+            price:10,
+        }
+    })
+</script>
+</html>

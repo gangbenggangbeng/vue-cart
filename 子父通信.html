@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>子父通信</title>
+    <style>
+    *{
+        position: absolute
+    }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <balance></balance>
+    </div>
+</body>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/vue/2.1.3/vue.js"></script>
+<script type="text/javascript">
+    //注册子组件 两个component, 子向父喊话,父显示余额
+    Vue.component("balance",{
+        template : `
+        <div>
+            <show @show-balance="show_balance"></show>
+            <div v-if="show">
+            您的余额: ¥98
+            </div>
+        </div>
+        `,
+        props : ["username"],
+        data : function(){
+            return {
+                show : false
+            }
+        },
+        methods:{
+            show_balance:function(data){
+                this.show = true;
+                console.log(1,data)
+            }
+        }
+    })
+
+    Vue.component("show",{
+        template : `
+        <div>
+            <button v-on:click="on_click()">显示余额</button>
+        </div>
+        `,
+        // props : ["msg"],
+        data : function(){
+            return {
+                
+            }
+        },
+        methods : {
+            on_click : function(){
+                this.$emit("show-balance",{a: 1, b: 2});
+            }
+        }
+    })
+//初始化父组件
+   new Vue({
+        el:"#app",
+    })
+</script>
+</html>

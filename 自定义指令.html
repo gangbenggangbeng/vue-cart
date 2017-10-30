@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>自定义指令</title>
+    <style>
+        *{
+            font-size: 30px;
+        }
+    .card{
+        height:200px;
+        background:#ccc;
+        width:150px;
+        
+    }
+    .box{
+        height: 50px;
+        width:50px;
+        border-width:25px;
+        display: flex;
+        
+    }
+    .box-small{
+        height: 50px;
+        width:50px;
+        border:1px solid #ccc;
+        margin : auto;
+    }
+
+    .soliddouble {border-style: solid double}
+    .doublesolid {border-style: double solid}
+    .groovedouble {border-style: groove double}
+    .three {border-style: solid double groove}
+    </style>
+    
+</head>
+<body>
+    <div id="app">
+        <div class="box">
+            <div class="box-small">
+
+            </div>
+        </div>
+        <input type="text" v-model="price" debounce="1000">{{ price }}
+       <div class="card" v-pin:true.top.right="card1.pinned">
+           <button @click="card1.pinned = !card1.pinned">定住\取消</button>
+        监控到开发贷款的vajfkdjg
+       </div>
+       <div class="card" v-pin="card2.pinned">
+           <a href="#" @click="card2.pinned = !card2.pinned"> pin it </a>
+        监控到开发贷款的vajfkdjg
+       </div>
+       监控到开发贷款的vajfkdjg监控到开发贷款的vajfkdjg监控到开发贷款的vajfkdjg监控到开发贷款的vajfkdjg监控到开发贷款的vajfkdjg监控到开发贷款的vajfkdjg监控到开发贷款的vajfkdjg监控到开发贷款的vajfkdjg监控到开发贷款的vajfkdjg监控到开发贷款的vajfkdjg监控到开发贷款的vajfkdjg监控到开发贷款的vajfkdjg监控到开发贷款的vajfkdjg监控到开发贷款的vajfkdjg监控到开发贷款的vajfkdjg监控到开发贷款的vajfkdjg监控到开发贷款的vajfkdjg监控到开发贷款的vajfkdjg监控到开发贷款的vajfkdjg监控到开发贷款的vajfkdjg监控到开发贷款的vajfkdjg监控到开发贷款的vajfkdjg监控到开发贷款的vajfkdjg监控到开发贷款的vajfkdjg监控到开发贷款的vajfkdjg
+    </div>
+</body>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/vue/2.1.3/vue.js"></script>
+<script type="text/javascript">
+//v-XXX 都是默认的指令 
+//自定义组件,属性,也可以自定义指令
+//自定义指令的修饰符和传参
+
+Vue.directive("pin",function(el,binding){
+    console.log(0,el)
+    console.log(1,binding)
+    var pinned = binding.value;
+    var position = binding.modifiers;
+    var warning = binding.arg;
+    // var abc = binding.abc;
+
+    if(pinned){
+        el.style.position = "fixed";
+        for(var key in position){
+            if(position[key]){
+                el.style[key] = "10px"
+            }
+        }
+
+        if(warning==="true"){
+            el.style.backgroundColor = "red";
+            el.style.color = "#fff";
+        }
+        // if(abc==="aaa"){
+        //     el.style.border = "2px solid cyan"
+        // }
+    }else{
+        el.style.position = "static"
+    }
+})
+//初始化父组件
+    var parent = new Vue({
+        el:"#app",
+        data :{
+            card1 : {
+                pinned:false
+            },
+            card2 : {
+                pinned:false
+            },
+            price:10,
+        }
+    })
+</script>
+</html>

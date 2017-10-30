@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>平行组件通信</title>
+</head>
+<body>
+    <div id="app">
+        <huahua></huahua>
+        <shuandan></shuandan>
+    </div>
+</body>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/vue/2.1.3/vue.js"></script>
+<script type="text/javascript">
+    //两个component, 一个负责说,一个负责听
+    //子组件通过  事件的方式  向父组件喊话
+   
+   var Event = new Vue();
+   Vue.component("huahua",{
+       template:`
+       <div>
+        我说:<input v-model="i_said" type="text" @keyup="onchange"/>
+       </div>
+       `,
+       data(){
+           return {
+               i_said : "",
+           }
+       },
+       methods:{
+           onchange: function(){
+               Event.$emit("huahua-said-something",this.i_said)
+           }
+       }
+   })
+   Vue.component("shuandan",{
+       template: `
+       <div>
+            花花说:{{ huahua_said }}
+        </div>
+       `,
+       data(){
+           return {
+               huahua_said: "",
+           }
+       },
+       mounted(){
+            console.log(555,this.$parent)//而已得到id是app的div
+            //挂载完毕
+            var me = this;
+            Event.$on("huahua-said-something",function(data){
+                //console.log(data);
+                //console.log(this);
+                //任意组件之间的通信,要有一个调度器,由这个调度器去调度每一条事件
+                me.huahua_said = data;
+            })
+       }
+   })
+//初始化父组件
+    var parent = new Vue({
+        el:"#app",
+        data:{
+           
+        },
+        mounted(){
+            console.log(666,this.$children)
+        }
+    })
+</script>
+</html>
